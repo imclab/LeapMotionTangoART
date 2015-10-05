@@ -72,7 +72,7 @@ public class HandController : MonoBehaviour {
   public bool recorderLoop = true;
   
   /** The object used to control recording and playback.*/
-  protected LeapRecorder recorder_ = new LeapRecorder();
+	protected LeapRecorder recorder_;// = new LeapRecorder();
   
   /** The underlying Leap Motion Controller object.*/
   protected Controller leap_controller_;
