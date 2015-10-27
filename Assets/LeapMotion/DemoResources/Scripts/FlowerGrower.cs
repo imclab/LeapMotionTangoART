@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using Leap;
 
 public class FlowerGrower : MonoBehaviour {
 
@@ -39,8 +40,10 @@ public class FlowerGrower : MonoBehaviour {
   private float light_source_intensity_ = 0.0f;
   private bool growing_ = true;
   private bool dieing_ = false;
+  private Controller leap_controller;
 
   void Start() {
+	leap_controller = new Controller ();
     flower_head_scale_ = flowerHead.localScale;
     light_source_intensity_ = lightSource.intensity;
     flowerHead.localScale = Vector3.zero;
@@ -113,5 +116,15 @@ public class FlowerGrower : MonoBehaviour {
 
     if (growthProgress == 1.0f && flowerToBloom != null)
       flowerToBloom.open = true;
+
+    if (Input.anyKey)
+    {
+      leap_controller.SetPolicy (Controller.PolicyFlag.POLICY_ALLOW_PAUSE_RESUME);
+      Debug.Log (leap_controller.IsPaused ());
+      if (leap_controller.IsPaused())
+        leap_controller.SetPaused(false);
+      else
+        leap_controller.SetPaused(true);
+    }
   }
 }
